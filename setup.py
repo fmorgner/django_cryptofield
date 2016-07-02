@@ -11,7 +11,7 @@ setup(name = 'django_cryptofield',
       classifiers = [
           'Programming Language :: Python',
           'Programming Language :: Python :: 3',
-          'License :: OSI Aproved :: BSD License',
+          'License :: OSI Approved :: BSD License',
           'Operating System :: OS Independent',
           'Framework :: Django',
       ],
