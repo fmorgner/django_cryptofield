@@ -6,11 +6,11 @@ class CryptoField(CharField):
     def __init__(self, algorithm='bf', *args, **kwargs):
         self.algorithm = algorithm
         self.old_value = None
-        super(PGCryptField, self).__init__(*args, **kwargs)
+        super(CryptoField, self).__init__(*args, **kwargs)
 
     def value_from_object(self, obj):
         self.old_value = getattr(obj, self.attname)
-        return super(PGCryptField, self).value_from_object(obj)
+        return super(CryptoField, self).value_from_object(obj)
 
     def get_placeholder(self, value=None, compiler=None, connection=None):
         if value == self.old_value:
@@ -19,7 +19,7 @@ class CryptoField(CharField):
         return "crypt(%s, gen_salt('{0}'))".format(self.algorithm)
 
     def deconstruct(self):
-        name, path, args, kwargs = super(PGCryptField, self).deconstruct()
+        name, path, args, kwargs = super(CryptoField, self).deconstruct()
         if self.algorithm != 'bf':
             kwargs['algorithm'] = self.algorithm
         return name, path, args, kwargs
