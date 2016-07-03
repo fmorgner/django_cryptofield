@@ -1,12 +1,21 @@
 from django.db.models.lookups import Exact
 from django.db.models import CharField
+from django import forms
 
 class CryptoField(CharField):
 
     def __init__(self, algorithm='bf', *args, **kwargs):
         self.algorithm = algorithm
         self.old_value = None
-        super(CryptoField, self).__init__(*args, **kwargs)
+        defaults = {'max_length': 256}
+        defaults.update(kwargs)
+        super(CryptoField, self).__init__(*args, **defaults)
+
+    def formfield(self, **kwargs):
+        defaults = {'form_class': forms.CharField,
+                    'widget': forms.PasswordInput}
+        defaults.update(kwargs)
+        return super(CryptoField, self).formfield(**defaults)
 
     def value_from_object(self, obj):
         self.old_value = getattr(obj, self.attname)

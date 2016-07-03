@@ -5,7 +5,7 @@ def readme():
         return rdm.read()
 
 setup(name = 'django_cryptofield',
-      version = '0.1',
+      version = '0.2',
       description = 'A field for database backed password crypto',
       long_description = readme(),
       classifiers = [
